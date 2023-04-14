@@ -239,6 +239,26 @@ contract MultiSig {
         emit transactionSubmission(transactionId);
 
     }
-
+    /// @dev Returns number of confirmations of a transaction.
+    /// @param _transactionId Transaction ID.
+    /// @return count Number of confirmations.
+    function getConfirmationCount(uint _transactionId)
+    public
+    view
+    returns (uint count)
+    {
+        for (uint i=0; i<owners.length; i++)
+            if (confirmations[_transactionId][owners[i]])
+                count += 1;
+    }
+    /// @dev Returns list of owners.
+    /// @return List of owner addresses.
+    function getOwners()
+    public
+    view
+    returns (address[] memory)
+    {
+        return owners;
+    }
 
 }
